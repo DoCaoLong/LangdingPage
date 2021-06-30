@@ -1,0 +1,69 @@
+footer {
+    background-color: black;
+    padding: 20px 0;
+    .container {
+        .wrapfoot {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            height: 100%;
+            .copy {
+                color: $white-cl;
+            }
+            .logoft {
+                @include mid;
+            }
+            .backtotop {
+                a {
+                    color: $white-cl;
+                    text-transform: uppercase;
+                    cursor: pointer;
+                    @include transition($t);
+                    &:hover {
+                        opacity: 0.6;
+                        @include transition($t);
+                        display: block;
+                    }
+                }
+            }
+        }
+    }
+    @include desktop {}
+    @include tablet {}
+    @include mobile {
+        .container {
+            .wrapfoot {
+                display: flex;
+                flex-direction: column;
+                position: initial;
+                justify-content: center;
+                .copy {
+                    color: $white-cl;
+                    display: block;
+                }
+                .backtotop {
+                    color: $white-cl;
+                    text-transform: uppercase;
+                    cursor: pointer;
+                    @include transition($t);
+                    display: inline-block;
+                    &:hover {
+                        opacity: 0.6;
+                        @include transition($t)
+                    }
+                }
+                .logoft {
+                    top: 0;
+                    left: 0;
+                    position: initial;
+                    transform: translate(0, 0);
+                    // position: initial;
+                    margin-top: 20px;
+                    margin-bottom: 20px;
+                }
+            }
+        }
+    }
+    @include mobile-xxs {}
+}

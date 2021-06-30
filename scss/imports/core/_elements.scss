@@ -1,0 +1,100 @@
+a {
+    color: $text-cl;
+    text-decoration: none;
+    display: block;
+}
+
+img {
+    display: block;
+    margin: auto;
+    max-width: 100%;
+}
+
+strong {
+    font-family: bb;
+}
+
+.-lv1 {
+    @include text(100px, b, 100px, $white-cl, none);
+    font-weight: normal;
+    margin: 0;
+    a {
+        @include text(100px, g, 100px, $white-cl, none);
+    }
+    @include tablet {}
+    @include mobile {}
+}
+
+.--button-main {
+    border: 2px solid $white-cl;
+    padding: 14px 40px;
+    @include midflex;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: $white-cl;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-family: Pnr;
+    font-size: 14px;
+    cursor: pointer;
+    @include transition(0.3s);
+    i {
+        display: block;
+        margin-left: 15px;
+        @include transition($t);
+    }
+    .icon-play {
+        width: 20px;
+        margin-right: 20px;
+    }
+    &:hover {
+        background: $yellow-cl;
+        @include transition(0.3s);
+    }
+    // @include mobile {
+    //     padding: 10px 10px;
+    // }
+}
+
+.btnmore {
+    display: inline-flex;
+    font-family: Pnb;
+    letter-spacing: 2px;
+    position: relative;
+    font-size: 14px;
+    text-transform: uppercase;
+    cursor: pointer;
+    img {
+        margin-left: 10px;
+    }
+    span {
+        opacity: 1;
+        &:hover {
+            opacity: 0.6;
+            @include transition($t);
+        }
+    }
+    &::before {
+        content: '';
+        position: absolute;
+        width: 35px;
+        height: 2px;
+        display: block;
+        background-color: $yellow-cl;
+        bottom: -5px;
+        left: 0;
+    }
+    img {
+        @include transform(translateX(0));
+        @include transition($t);
+    }
+    &:hover {
+        img {
+            @include transform(translateX(10px));
+            @include transition($t);
+        }
+    }
+}
+
+// .arrow {}
