@@ -1,0 +1,312 @@
+header {
+  --heightHeader: 80px;
+  width: 100%;
+  height: var(--heightHeader);
+  // background-color: black;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  .container-fluid {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .logo {
+      .name-logo {
+        @include text(16px, Pnr, normal, $white-cl, uppercase);
+        font-weight: 600;
+      }
+    }
+    .menu {
+      display: flex;
+      height: 100%;
+      position: absolute;
+      left: 50%;
+      @include transform(translateX(-50%));
+      li {
+        height: 100%;
+        a {
+          height: 100%;
+          // margin k bị tràn 2 bên
+          margin: 0 30px;
+          @include midflex;
+          @include text(16px, Pnr, normal, $white-cl, uppercase);
+          opacity: 1;
+          @include transition(0.3s);
+          position: relative;
+          overflow: hidden;
+          &:after {
+            content: "";
+            width: 0%;
+            height: 2px;
+            background: #fff;
+            position: absolute;
+            right: 0;
+            bottom: 25px;
+            @include transition($t cubic-bezier(0.93, 0.02, 0.48, 0.91));
+          }
+          &:hover {
+            // opacity: 0.5;
+            // @include transition(0.3s);
+            &:after {
+              content: "";
+              width: 100%;
+              left: 0;
+              @include transition($t cubic-bezier(0.93, 0.02, 0.48, 0.91));
+            }
+          }
+          &.active {
+            //  color: $yellow-cl;
+            &:after {
+              content: "";
+              width: 100%;
+              height: 2px;
+              background: #fff;
+              position: absolute;
+              left: 0;
+              bottom: 25px;
+              @include transform(scaleX(1));
+              @include transform-origin(left center);
+              @include transition($t cubic-bezier(0.93, 0.02, 0.48, 0.91));
+            }
+          }
+        }
+      }
+    }
+    .nav {
+      display: none;
+    }
+    .lang {
+      cursor: pointer;
+      height: 100%;
+      position: relative;
+      @include midflex;
+      &__current {
+        display: flex;
+        height: 100%;
+        align-items: center;
+        @include text(16px, Pnr, normal, $white-cl, uppercase);
+        span {
+          margin-right: 6px;
+        }
+        i {
+          @include midflex;
+          display: block;
+          cursor: pointer;
+          img {
+            width: 12px;
+          }
+        }
+      }
+      &__option {
+        @include transform-origin(top center);
+        width: 60px;
+        height: auto;
+        background-color: #fff;
+        position: absolute;
+        padding: 20px;
+        right: 0;
+        // margin-right: 10px;
+        top: 30px;
+        text-align: right;
+        display: none;
+        @include transform(scaleY(0));
+        @include transition(0.5s);
+        a {
+          height: 100%;
+          @include transition(0.3s);
+          position: relative;
+          // overflow: hidden;
+          font-weight: bold;
+          color: $text-cl;
+          padding: 10px 0;
+          &:after {
+            content: "";
+            width: 100%;
+            height: 2px;
+            background: #000;
+            position: absolute;
+            left: 0;
+            bottom: 10px;
+            @include transform(scaleX(0));
+            @include transform-origin(left center);
+            @include transition($t cubic-bezier(0.93, 0.02, 0.48, 0.91));
+          }
+          &:hover {
+            // opacity: 0.5;
+            // @include transition(0.3s);
+            &:after {
+              content: "";
+              @include transform(scaleX(1));
+              @include transform-origin(right center);
+              @include transition($t cubic-bezier(0.93, 0.02, 0.48, 0.91));
+            }
+          }
+        }
+      }
+      &.active {
+        .lang__option {
+          display: block;
+          @include transform(scale(1));
+          @include transform-origin(top center);
+          @include transition(0.5s);
+        }
+      }
+    }
+    .btnmenu {
+      display: none;
+      width: 40px;
+      height: 22px;
+      position: relative;
+      z-index: 300;
+      span {
+        width: 100%;
+        height: 3px;
+        display: block;
+        background: $yellow-cl;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        @include transition(transform 0.3s);
+      }
+      &:before,
+      &:after {
+        content: "";
+        width: 100%;
+        height: 3px;
+        display: block;
+        background: $yellow-cl;
+        @include transform(rotate(0deg) translateY(0px));
+        @include transition(0.3s);
+      }
+      &:after {
+        position: absolute;
+        bottom: 0;
+      }
+      &.clicked {
+        &:before {
+          @include transform(rotate(45deg) translate(6px, 8px));
+          @include transition(transform 0.3s);
+        }
+        span {
+          opacity: 0;
+          @include transition(0.3s);
+        }
+        &:after {
+          @include transform(rotate(-45deg) translate(4px, -8px));
+          @include transition(transform 0.3s);
+        }
+      }
+    }
+  }
+  @include tablet {
+    .container-fluid {
+      .logo {
+        img {
+          width: 150px;
+        }
+      }
+      .lang {
+        width: 100%;
+        position: relative;
+        &__current {
+          position: absolute;
+          right: 20px;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+        &__option {
+          margin-right: 10px;
+          margin-top: -10px;
+        }
+      }
+      .menu {
+        display: none;
+      }
+      .nav {
+        display: block;
+        flex-direction: column;
+        width: 100vw;
+        height: 100vh;
+        background: $black-cl;
+        position: fixed;
+        z-index: 200;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        pointer-events: none;
+        @include midflex;
+        @include transition(opacity 0.3s);
+        @include transform(initial);
+        // ul {
+        li {
+          margin: 30px;
+          a {
+            @include text(24px, Pnb, normal, $yellow-cl, capitalize);
+            text-align: center;
+            &:hover {
+              opacity: 0.5;
+              @include transition(opacity 0.3s);
+            }
+          }
+        }
+        &.active {
+          opacity: 1;
+          pointer-events: auto;
+          @include transition(opacity 0.3s);
+        }
+        // }
+      }
+      .btnmenu {
+        display: block;
+      }
+    }
+  }
+  @include mobile {
+    --heightHeader: 60px;
+    .container-fluid {
+      .menu {
+        display: none;
+      }
+      .nav {
+        display: block;
+        flex-direction: column;
+        width: 100vw;
+        height: 100vh;
+        background: $black-cl;
+        position: fixed;
+        z-index: 200;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        pointer-events: none;
+        @include transition(0.3s);
+        @include transform(initial);
+        ul {
+          @include mid;
+          li {
+            height: 100%;
+            margin: 40px;
+            @include midflex;
+            a {
+              @include text(20px, Pnb, normal, $yellow-cl, capitalize);
+              &:hover {
+                opacity: 0.5;
+                @include transition(0.3);
+              }
+            }
+          }
+          &.active {
+            opacity: 1;
+            pointer-events: auto;
+            @include transition(0.3s);
+          }
+        }
+      }
+      .btnmenu {
+        display: block;
+      }
+    }
+  }
+}
